@@ -55,7 +55,7 @@ iris-ml-analysis/
 | `02_kmeans_iris.py` | 對 Iris 做 K-Means (k=8)，以 2×2 子圖對照原始品種與分群結果 | 1 張圖 |
 | `03_elbow_sse_iris.py` | 手肘法：用全部 4 個特徵計算 k=1–8 的 SSE，找出合適的 k | 1 張圖 |
 | `04_elbow_sse_from_csv.py` | 手肘法：讀取 `data/iris.csv`，只用 sepal length 計算 k=1–8 的 SSE | 1 張圖 |
-| `05_kmeans_compare_k.py` | 比較 k = 2、3、4、6、8 的分群結果：只用花萼特徵 vs 只用花瓣特徵，並印出各自的純度 | 文字 + 1 張圖 |
+| `05_kmeans_compare_k.py` | 比較 k = 2、3、4、6、8 的分群結果：只用花萼特徵 vs 只用花瓣特徵，並印出各自的純度；另畫出 k = 3 時兩者的誤判樣本 | 文字 + 2 張圖 |
 | `06_silhouette_iris.py` | 輪廓分析：用全部 4 個特徵計算 k=2–8 的平均輪廓係數，找出最佳 k | 文字 + 1 張圖 |
 
 ### 04_fisher_lda — Fisher 線性判別分析
