@@ -41,7 +41,7 @@ iris-ml-analysis/
 
 | 程式 | 功能 | 輸出 |
 |---|---|---|
-| `01_knn_manual_shuffle_split.py` | 用 numpy 手動打亂資料，前 100 筆訓練、後 50 筆測試，以 k=5 的 KNN 預測並印出預測值與實際值 | 文字 (每次結果不同) |
+| `01_knn_manual_shuffle_split.py` | 用 numpy 手動打亂資料，前 100 筆訓練、後 50 筆測試，以 k=5 的 KNN 預測並印出預測值與實際值 (固定亂數種子) | 文字 |
 | `02_knn_train_test_split.py` | 用 `train_test_split` (random_state=0) 切分，以 KNN 預測並計算準確率 (0.98) | 文字 |
 | `03_knn_cross_validation.py` | 以重複分層 10-fold 交叉驗證 (10 折 × 10 次) 比較 k=1–30 的訓練與驗證準確率，找出最佳 k (17) 並觀察過擬合/欠擬合 | 文字 + 1 張圖 |
 
@@ -51,8 +51,8 @@ iris-ml-analysis/
 
 | 程式 | 功能 | 輸出 |
 |---|---|---|
-| `01_kmeans_blobs_demo.py` | 以 `make_blobs` 產生單一群的隨機資料，示範 K-Means 仍會切成 k 群 | 1 張圖 (每次不同) |
-| `02_kmeans_iris.py` | 對 Iris 做 K-Means (k=8)，以 2×2 子圖對照原始品種與分群結果 | 1 張圖 (每次不同) |
+| `01_kmeans_blobs_demo.py` | 以 `make_blobs` 產生單一群的隨機資料，示範 K-Means 仍會切成 k 群 | 1 張圖 |
+| `02_kmeans_iris.py` | 對 Iris 做 K-Means (k=8)，以 2×2 子圖對照原始品種與分群結果 | 1 張圖 |
 | `03_elbow_sse_iris.py` | 手肘法：用全部 4 個特徵計算 k=1–8 的 SSE，找出合適的 k | 1 張圖 |
 | `04_elbow_sse_from_csv.py` | 手肘法：讀取 `data/iris.csv`，只用 sepal length 計算 k=1–8 的 SSE | 1 張圖 |
 | `05_kmeans_compare_k.py` | 比較 k = 2、3、4、6、8 的分群結果：只用花萼特徵 vs 只用花瓣特徵，並印出各自的純度 | 文字 + 1 張圖 |

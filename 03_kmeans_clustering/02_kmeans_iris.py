@@ -33,7 +33,9 @@ dx = iris_dataset['data']
 dy = iris_dataset['target']
 # Use KMeans to find n clusters in the data
 # 用 KMeans 在資料中找出 n 個分組
-kmeans = KMeans(n_clusters=n1)
+# Fixed random_state so every run gives the same result
+# 固定 random_state，讓每次執行結果相同
+kmeans = KMeans(n_clusters=n1, n_init=10, random_state=0)
 kmeans.fit(dx)
 
 # Predict the new cluster labels
@@ -48,15 +50,19 @@ new_dy = kmeans.predict(dx)
 # 畫出原始的群資料
 
 plt.rcParams['font.size'] = 8
-plt.figure(figsize=(10,5))
+plt.figure(figsize=(10,7))
 
 plt.subplot(221)  # 2x2 grid, position 1 / 2 列 2 欄，目前位置為 1
 plt.title('Original Sepal length VS Sepal width')
 plt.scatter(dx.T[0], dx.T[1], c=dy, cmap=plt.cm.Set1)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
 
 plt.subplot(222)  # 2x2 grid, position 2 / 2 列 2 欄，目前位置為 2
 plt.title('Original Sepal length VS Petal length')
 plt.scatter(dx.T[0], dx.T[2], c=dy, cmap=plt.cm.Set1)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('petal length (cm)')
 
 
 # Plot the data colored by the n KMeans clusters
@@ -65,10 +71,14 @@ n1 = str(n1)
 plt.subplot(223)
 plt.title(n1 + ' groups Sepal length VS Sepal width')
 plt.scatter(dx.T[0], dx.T[1], c=new_dy, cmap=plt.cm.Set1)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
 
 plt.subplot(224)
 plt.title(n1 + ' groups Sepal length VS Petal length')
 plt.scatter(dx.T[0], dx.T[2], c=new_dy, cmap=plt.cm.Set1)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('petal length (cm)')
 
 
 

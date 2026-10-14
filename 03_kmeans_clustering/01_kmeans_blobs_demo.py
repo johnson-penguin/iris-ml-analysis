@@ -21,11 +21,13 @@ print('將資料分為' ,n1,'群')
 # Generate a samples with b features in c groups (dy is the original label)
 # 隨機產生 c 組、b 個特徵的資料共 a 筆 (dy 即原始目標值 label)
 # dx, dy = make_blobs(n_samples=a, n_features=b, centers=c, shuffle='True')
-dx, dy = make_blobs(n_samples=80, n_features=2, centers=1, shuffle=True)
+# Fixed random_state so every run gives the same result
+# 固定 random_state，讓每次執行結果相同
+dx, dy = make_blobs(n_samples=80, n_features=2, centers=1, shuffle=True, random_state=0)
 
 # Use KMeans to find n clusters in the data
 # 用 KMeans 在資料中找出 n 個分組
-kmeans = KMeans(n_clusters=n1)
+kmeans = KMeans(n_clusters=n1, n_init=10, random_state=0)
 kmeans.fit(dx)
 
 # Predict the new cluster labels
@@ -38,6 +40,8 @@ plt.figure(figsize=(16, 8))
 # 畫出原始的群資料
 plt.subplot(121)
 plt.title('Original data ')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
 plt.scatter(dx.T[0], dx.T[1], c=dy, cmap=plt.cm.Set1)
 
 # Plot the data colored by the n KMeans clusters
@@ -45,6 +49,8 @@ plt.scatter(dx.T[0], dx.T[1], c=dy, cmap=plt.cm.Set1)
 n1 = str(n1)
 plt.subplot(122)
 plt.title('KMeans=' + n1 + ' groups')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
 plt.scatter(dx.T[0], dx.T[1], c=new_dy, cmap=plt.cm.Set1)
 
 # Show the figure

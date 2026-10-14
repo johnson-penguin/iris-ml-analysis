@@ -71,7 +71,7 @@ for i in range(3):
     plt.hist(x_fisher[y == i, 0], density=False, color='white',edgecolor = colors[i], cumulative = False, label = labels[i])
 
 plt.xlabel('Fisher Feature One')
-plt.ylabel('Fisher Feature Two')
+plt.ylabel('Frequency')
 plt.title('Fisher Features - Iris Dataset')
 plt.legend()
 

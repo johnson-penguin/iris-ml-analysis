@@ -19,8 +19,9 @@ Y = iris ['target']
 # Original order
 # 原始順序
 index = np.arange(150)
-# Shuffle randomly
-# 亂數打亂
+# Shuffle randomly, with a fixed seed so every run gives the same split
+# 亂數打亂，固定種子讓每次執行的切分都相同
+np.random.seed(0)
 np.random.shuffle(index)
 # The first 100 shuffled samples train the KNN, the last 50 test the model
 # 打亂後的前 100 筆用於 KNN 訓練，後 50 筆用於模型測試
