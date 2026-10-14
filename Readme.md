@@ -27,7 +27,19 @@ iris-ml-analysis/
 │   └── 06_fisher_manual_histogram.py         以 numpy 手刻 Fisher features
 ├── data/
 │   └── iris.csv              由 sklearn 匯出的 Iris 資料
-└── docs/                     報告文件
+├── docs/                     報告文件
+├── outputs/                  執行後產生的圖 (不納入 git)
+└── requirements.txt          固定版本的套件清單
+```
+
+## 環境建置
+
+以 Python 3.10 測試，建立虛擬環境並安裝相同版本的套件：
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 ## 執行
@@ -35,7 +47,13 @@ iris-ml-analysis/
 所有路徑皆以專案根目錄為基準，可在任何目錄下執行：
 
 ```bash
-python3 03_kmeans_clustering/04_elbow_sse_from_csv.py
+python 01_data_exploration/01_dataset_info.py
 ```
 
-需要套件：`numpy`、`pandas`、`matplotlib`、`scikit-learn`、`seaborn`。
+有畫圖的程式會把每張圖存成 `outputs/<檔名>_<編號>.png`；有圖形介面時也會另外跳出視窗。
+
+一次執行全部程式：
+
+```bash
+for f in 0*/*.py; do echo "== $f"; python "$f"; done
+```
