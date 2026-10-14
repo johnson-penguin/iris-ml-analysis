@@ -2,7 +2,7 @@
 
 以鳶尾花 (Iris) 資料集練習資料探索、KNN 分類、K-Means 分群與 Fisher 線性判別分析 (LDA)。
 
-每張圖的 X/Y 軸意義與觀察結果請見 **[分析報告 docs/report.md](docs/report.md)**。
+每張圖的 X/Y 軸意義與觀察結果請見 **[分析報告 docs/Report.md](docs/Report.md)**，重點整理見 [重點結論](docs/Report.md#2-重點結論)。
 
 ## 專案結構
 
@@ -12,9 +12,10 @@ iris-ml-analysis/
 ├── 02_knn_classification/    KNN 分類
 ├── 03_kmeans_clustering/     K-Means 分群
 ├── 04_fisher_lda/            Fisher 線性判別分析
+├── 05_model_evaluation/      模型評估與比較
 ├── data/iris.csv             由 sklearn 匯出的 Iris 資料 (150 筆，4 個特徵 + target)
 ├── docs/
-│   ├── report.md             分析報告：每張圖的說明與觀察
+│   ├── Report.md             分析報告：每張圖的說明與觀察
 │   └── figures/              報告使用的圖檔
 ├── outputs/                  執行後產生的圖 (不納入 git)
 └── requirements.txt          固定版本的套件清單
@@ -26,6 +27,8 @@ iris-ml-analysis/
 
 ### 01_data_exploration — 資料探索
 
+報告：[3. 資料探索](docs/Report.md#3-資料探索)
+
 | 程式 | 功能 | 輸出 |
 |---|---|---|
 | `01_dataset_info.py` | 印出資料集的 keys、4 個特徵名稱、資料維度 (150, 4) | 文字 |
@@ -34,12 +37,17 @@ iris-ml-analysis/
 
 ### 02_knn_classification — KNN 分類
 
+報告：[4. KNN 分類](docs/Report.md#4-knn-分類)
+
 | 程式 | 功能 | 輸出 |
 |---|---|---|
 | `01_knn_manual_shuffle_split.py` | 用 numpy 手動打亂資料，前 100 筆訓練、後 50 筆測試，以 k=5 的 KNN 預測並印出預測值與實際值 | 文字 (每次結果不同) |
 | `02_knn_train_test_split.py` | 用 `train_test_split` (random_state=0) 切分，以 KNN 預測並計算準確率 (0.98) | 文字 |
+| `03_knn_cross_validation.py` | 以重複分層 10-fold 交叉驗證 (10 折 × 10 次) 比較 k=1–30 的訓練與驗證準確率，找出最佳 k (17) 並觀察過擬合/欠擬合 | 文字 + 1 張圖 |
 
 ### 03_kmeans_clustering — K-Means 分群
+
+報告：[5. K-Means 分群](docs/Report.md#5-k-means-分群)
 
 | 程式 | 功能 | 輸出 |
 |---|---|---|
@@ -52,6 +60,8 @@ iris-ml-analysis/
 
 ### 04_fisher_lda — Fisher 線性判別分析
 
+報告：[6. Fisher 線性判別分析 (LDA)](docs/Report.md#6-fisher-線性判別分析-lda)
+
 | 程式 | 功能 | 輸出 |
 |---|---|---|
 | `01_lda_1d_histogram.py` | 用 sklearn LDA 投影到一維，畫出各品種在 Fisher Feature One 上的直方圖 | 1 張圖 |
@@ -60,6 +70,16 @@ iris-ml-analysis/
 | `04_lda_2d_scatter_filled.py` | 同上，改用實心點與不同配色 | 1 張圖 |
 | `05_lda_2d_scatter_ellipse.py` | 二維散佈圖，並以各品種的平均值與共變異數畫出 ±1 標準差橢圓 | 1 張圖 |
 | `06_fisher_manual_histogram.py` | 不用 sklearn，以 numpy 手動計算 inv(Sw)·Sb 的特徵向量得到 Fisher features，畫出直方圖 | 1 張圖 |
+
+### 05_model_evaluation — 模型評估與比較
+
+報告：[7. 混淆矩陣](docs/Report.md#7-模型評估混淆矩陣)、[8. PCA vs LDA](docs/Report.md#8-降維比較pca-vs-lda)、[9. 決策邊界比較](docs/Report.md#9-決策邊界比較)
+
+| 程式 | 功能 | 輸出 |
+|---|---|---|
+| `01_confusion_matrices.py` | 畫出 KNN (k=17)、LDA (皆用 10-fold 交叉驗證預測) 與 K-Means (k=3) 的混淆矩陣，並印出各類別的 precision / recall | 文字 + 1 張圖 |
+| `02_pca_vs_lda.py` | 比較 PCA (非監督式) 與 LDA (監督式) 的二維投影、第一成分直方圖、解釋變異比例，並以 KNN 交叉驗證比較投影後的準確率 | 文字 + 2 張圖 |
+| `03_decision_boundaries.py` | 以花瓣長度、寬度畫出 KNN (k=1、k=17)、LDA、K-Means 的決策邊界並標出誤判樣本；圖與輸出皆為中文 | 文字 + 1 張圖 |
 
 ## 環境建置
 
@@ -80,6 +100,8 @@ python 01_data_exploration/01_dataset_info.py
 ```
 
 有畫圖的程式會把每張圖存成 `outputs/<檔名>_<編號>.png`；有圖形介面時也會另外跳出視窗。
+
+`03_decision_boundaries.py` 的圖使用中文字型，會依序尋找 Noto Sans CJK TC、Microsoft JhengHei (Windows)、PingFang TC (macOS)。Linux 若沒有中文字型，可安裝 `fonts-noto-cjk`。
 
 一次執行全部程式：
 
